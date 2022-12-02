@@ -24,23 +24,12 @@ public class PrimeService {
     }
 
     private boolean isPrime(int n) {
-        if (n <= 1) {
-            return false; // 1 is not a prime number
-        }
-
-        // Do an even check, super simple and we don't want to waste cache memory on even numbers
-        if (n % 2 == 0) {
-            return false;
-        }
-
         // TODO Check primeCache
 
-        for (int i = 3; i < Math.sqrt(n); i += 2) {
-            if (n % i == 0) {
-                return false;
-            }
-        }
+        boolean isPrime = PrimeUtil.isPrime(n);
 
-        return true;
+        // TODO If the number is odd, we cache it, calculation for even isn't worth being cached
+
+        return isPrime;
     }
 }
