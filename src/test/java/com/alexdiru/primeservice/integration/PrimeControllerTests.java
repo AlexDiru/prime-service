@@ -48,15 +48,15 @@ public class PrimeControllerTests {
 
     public static List<ValidTestCase> validTestCaseData() {
         return List.of(
-                new ValidTestCase("/prime/12", MediaType.APPLICATION_JSON, "{\"initial\":12,\"primes\":[2,3,5,7,11]}"),
-                new ValidTestCase("/prime/13", MediaType.APPLICATION_JSON, "{\"initial\":13,\"primes\":[2,3,5,7,11,13]}")
+                new ValidTestCase("/primes/12", MediaType.APPLICATION_JSON, "{\"initial\":12,\"primes\":[2,3,5,7,11]}"),
+                new ValidTestCase("/primes/13", MediaType.APPLICATION_JSON, "{\"initial\":13,\"primes\":[2,3,5,7,11,13]}")
         );
     }
 
     public static List<InvalidTestCase> invalidTestCaseData() {
         return List.of(
-                new InvalidTestCase("/prime/x"),
-                new InvalidTestCase("/prime/3.5"));
+                new InvalidTestCase("/primes/x"),
+                new InvalidTestCase("/primes/3.5"));
     }
 
     private static class InvalidTestCase {

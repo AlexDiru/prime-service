@@ -14,7 +14,7 @@ public class PrimeController {
     @Autowired
     public PrimeService primeService;
 
-    @GetMapping("/prime/{initial}")
+    @GetMapping("/primes/{initial}")
     public PrimeResponse getPrimeResponse(@PathVariable(value="initial") int initial) {
         List<Integer> primes = primeService.getPrimes(initial);
 
