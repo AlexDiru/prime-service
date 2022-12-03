@@ -2,12 +2,10 @@ package com.alexdiru.primeservice;
 
 import com.fasterxml.jackson.core.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 @RestController
@@ -18,8 +16,10 @@ public class PrimeController {
     public PrimeService primeService;
 
     @GetMapping(value = "/{initial}", produces = { "application/json", "application/xml" })
-    public PrimeResponse getPrimeResponse(@PathVariable(value="initial") int initial) throws ExecutionException {
-        List<Integer> primes = primeService.getPrimes(initial);
+    public PrimeResponse getPrimeResponse(
+            @PathVariable(value="initial") int initial,
+            @RequestParam("algorithm") Optional<PrimeService.Algorithm> algorithm) throws ExecutionException {
+        List<Integer> primes = primeService.getPrimes(initial, algorithm.orElse(PrimeService.Algorithm.SIMPLE_PARALLEL));
 
         var primeResponse = new PrimeResponse(initial, primes);
         return primeResponse;

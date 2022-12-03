@@ -55,6 +55,13 @@ public class PrimeUtilTests {
         assertIterableEquals(primesTestCase.getPrimes(), result);
     }
 
+    @ParameterizedTest
+    @MethodSource(value = "primesTestCaseData")
+    public void whenSieve_shouldCalculatePrimes(PrimesTestCase primesTestCase) {
+        List<Integer> result = PrimeUtil.calculatePrimesUsingSieve(primesTestCase.getInitial());
+        assertIterableEquals(primesTestCase.getPrimes(), result);
+    }
+
     // TODO read the longer test cases from a CSV
     private static List<PrimesTestCase> primesTestCaseData() {
         return List.of(

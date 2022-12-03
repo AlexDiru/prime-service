@@ -12,8 +12,17 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class PrimeService {
 
-    public List<Integer> getPrimes(int initial) throws ExecutionException {
-        return initialCache.get(initial);
+    public enum Algorithm {
+        SIMPLE_PARALLEL,
+        SIEVE_OF_ATKIN
+    }
+
+    public List<Integer> getPrimes(int initial, Algorithm algorithm) throws ExecutionException {
+        // The cache is implemented for the straightforward algorithm, but not the Sieve
+        switch (algorithm) {
+            case SIEVE_OF_ATKIN -> { return PrimeUtil.calculatePrimesUsingSieve(initial); }
+            default -> { return initialCache.get(initial); }
+        }
     }
 
     // The cache could be Spring-ified, I chose to use Guava

@@ -60,21 +60,26 @@ public class PrimeControllerTests {
     public static List<ValidTestCase> validJsonTestCaseData() {
         return List.of(
                 new ValidTestCase("/primes/12", MediaType.APPLICATION_JSON, "{\"initial\":12,\"primes\":[2,3,5,7,11]}"),
-                new ValidTestCase("/primes/13", MediaType.APPLICATION_JSON, "{\"initial\":13,\"primes\":[2,3,5,7,11,13]}")
+                new ValidTestCase("/primes/13", MediaType.APPLICATION_JSON, "{\"initial\":13,\"primes\":[2,3,5,7,11,13]}"),
+                new ValidTestCase("/primes/12?algorithm=SIEVE_OF_ATKIN", MediaType.APPLICATION_JSON, "{\"initial\":12,\"primes\":[2,3,5,7,11]}"),
+                new ValidTestCase("/primes/13?algorithm=SIEVE_OF_ATKIN", MediaType.APPLICATION_JSON, "{\"initial\":13,\"primes\":[2,3,5,7,11,13]}")
         );
     }
 
     public static List<ValidTestCase> validXmlTestCaseData() {
         return List.of(
                 new ValidTestCase("/primes/12", MediaType.APPLICATION_XML, "<PrimeResponse><initial>12</initial><primes><primes>2</primes><primes>3</primes><primes>5</primes><primes>7</primes><primes>11</primes></primes></PrimeResponse>"),
-                new ValidTestCase("/primes/13", MediaType.APPLICATION_XML, "<PrimeResponse><initial>13</initial><primes><primes>2</primes><primes>3</primes><primes>5</primes><primes>7</primes><primes>11</primes><primes>13</primes></primes></PrimeResponse>")
+                new ValidTestCase("/primes/13", MediaType.APPLICATION_XML, "<PrimeResponse><initial>13</initial><primes><primes>2</primes><primes>3</primes><primes>5</primes><primes>7</primes><primes>11</primes><primes>13</primes></primes></PrimeResponse>"),
+                new ValidTestCase("/primes/12?algorithm=SIEVE_OF_ATKIN", MediaType.APPLICATION_XML, "<PrimeResponse><initial>12</initial><primes><primes>2</primes><primes>3</primes><primes>5</primes><primes>7</primes><primes>11</primes></primes></PrimeResponse>"),
+                new ValidTestCase("/primes/13?algorithm=SIEVE_OF_ATKIN", MediaType.APPLICATION_XML, "<PrimeResponse><initial>13</initial><primes><primes>2</primes><primes>3</primes><primes>5</primes><primes>7</primes><primes>11</primes><primes>13</primes></primes></PrimeResponse>")
         );
     }
 
     public static List<InvalidTestCase> invalidTestCaseData() {
         return List.of(
                 new InvalidTestCase("/primes/x"),
-                new InvalidTestCase("/primes/3.5"));
+                new InvalidTestCase("/primes/3.5"),
+                new InvalidTestCase("/primes/2147483648")); // Integer.MAX_VALUE + 1
     }
 
     private static class InvalidTestCase {

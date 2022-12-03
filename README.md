@@ -20,6 +20,10 @@ Read JSON: `curl -v -H "Accept: application/json" http://localhost:8080/primes/1
 
 Read XML: `curl -v -H "Accept: application/xml" http://localhost:8080/primes/1000`
 
+Two algorithms are implemented, a standard one using a for-loop which is multithreaded and used by default.
+
+A more complex algorithm, the Sieve of Atkin is also used, which can be used if a URL parameter is used: `http://localhost:8080/primes/1000?algorithm=SIEVE_OF_ATKIN`
+
 ### Api Docs
 
 Accessible at `http://localhost:8080/swagger-ui/index.html`
@@ -38,6 +42,6 @@ Boot etc. ✅
 
 - Consider supporting varying return content type such as XML based on requested media type. ✅
 - Consider ways to improve performance e.g. caching ✅, threading ✅
-- Consider supporting multiple algorithms based on optional parameters ❌
+- Consider supporting multiple algorithms based on optional parameters ✅
 - Consider adding API documentation ✅
 - Consider packaging it as a runnable Docker image ✅

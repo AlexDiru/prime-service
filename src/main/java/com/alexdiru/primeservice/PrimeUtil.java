@@ -1,6 +1,7 @@
 package com.alexdiru.primeservice;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -38,6 +39,59 @@ public class PrimeUtil {
         }
 
         return results;
+    }
+
+    public static List<Integer> calculatePrimesUsingSieve(int initial) {
+        // Used for help:
+        // https://stackoverflow.com/questions/10580159/sieve-of-atkin-explanation-and-java-example
+        boolean[] flags = new boolean[initial + 1];
+        Arrays.fill(flags, false);
+
+        flags[2] = true;
+        flags[3] = true;
+
+        int sqrtInitial = (int)Math.ceil(Math.sqrt(initial));
+
+        // Use the sieve algorithm to find all the primes up to initial
+        for (int x = 1; x <= sqrtInitial; x++) {
+            for (int y = 1; y <= sqrtInitial; y++) {
+                // First polynomial value
+                int n = 4 * x * x + y * y;
+                if (n <= initial && (n % 12 == 1 || n % 12 == 5)) {
+                    flags[n] = !flags[n];
+                }
+
+                // Second polynomial value
+                n = 3 * x * x + y * y;
+                if (n <= initial && n % 12 == 7) {
+                    flags[n] = !flags[n];
+                }
+
+                // Third polynomial value
+                n = 3 * x * x - y * y;
+                if (x > y && n <= initial && n % 12 == 11) {
+                    flags[n] = !flags[n];
+                }
+            }
+        }
+
+        // Remove all perfect squares
+        for (int i = 5; i <= sqrtInitial; i++) {
+            if (flags[i]) {
+                for (int j = i * i; j <= initial; j += i * i) {
+                    flags[j] = false;
+                }
+            }
+        }
+
+        // Add all primes to a list
+        List<Integer> primes = new ArrayList<>();
+        for (int i = 0; i < flags.length; i++) {
+            if (flags[i]) {
+                primes.add(i);
+            }
+        }
+        return primes;
     }
 
     private record CalculatePrimesInRangeTask(int fromInclusive, int toInclusive) implements Callable<List<Integer>> {
