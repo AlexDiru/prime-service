@@ -15,7 +15,7 @@ public class PrimeController {
     @Autowired
     public PrimeService primeService;
 
-    @GetMapping("/primes/{initial}")
+    @GetMapping(value = "/primes/{initial}", produces = { "application/json", "application/xml" })
     public PrimeResponse getPrimeResponse(@PathVariable(value="initial") int initial) throws ExecutionException {
         List<Integer> primes = primeService.getPrimes(initial);
 
