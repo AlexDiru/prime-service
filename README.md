@@ -1,17 +1,21 @@
-# Run Application
+# Building and running
 
-- Application runs on port 8080
+(Application runs on port 8080)
 
-`./mvnw spring-boot:run`
+Run with Maven: `./mvnw spring-boot:run`
 
-### Read JSON
+Package with Maven: `./mvnw package`
 
-`curl -v -H "Accept: application/json" http://localhost:8080/primes/1000`
+Build with Docker: `docker build -t prime-service:latest .`
 
-### Read XML
-
-`curl -v -H "Accept: application/xml" http://localhost:8080/primes/1000`
+Run with Docker: `docker run -p 8080:8080 prime-service`
 
 # Run Tests
 
 `./mvnw test`
+
+# Using the application
+
+Read JSON: `curl -v -H "Accept: application/json" http://localhost:8080/primes/1000`
+
+Read XML: `curl -v -H "Accept: application/xml" http://localhost:8080/primes/1000`
