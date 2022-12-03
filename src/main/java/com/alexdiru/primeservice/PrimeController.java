@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 public class PrimeController {
@@ -15,7 +16,7 @@ public class PrimeController {
     public PrimeService primeService;
 
     @GetMapping("/primes/{initial}")
-    public PrimeResponse getPrimeResponse(@PathVariable(value="initial") int initial) {
+    public PrimeResponse getPrimeResponse(@PathVariable(value="initial") int initial) throws ExecutionException {
         List<Integer> primes = primeService.getPrimes(initial);
 
         var primeResponse = new PrimeResponse(initial, primes);
