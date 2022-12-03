@@ -1,7 +1,5 @@
 package com.alexdiru.primeservice;
 
-import org.springframework.boot.jackson.JsonComponent;
-
 import java.util.List;
 
 public class PrimeResponse {
